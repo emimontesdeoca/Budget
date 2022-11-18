@@ -1,0 +1,2 @@
+docker pull postgres
+docker run -d -p 5432:5432 --name postgres -e POSTGRES_USER=budget POSTGRES_PASSWORD=budget123456 -d postgres
