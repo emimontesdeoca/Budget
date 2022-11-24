@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: src/BlazorApp1/Server/Dockerfile
-  db:
+  postgres:
     image: postgres:alpine
     restart: always
     environment:
