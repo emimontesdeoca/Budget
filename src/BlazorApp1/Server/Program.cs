@@ -2,13 +2,17 @@ using BlazorApp1.Server.Data;
 using BlazorApp1.Server.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options
+    .UseNpgsql(connectionString, x => x.MigrationsHistoryTable("__efmigrationshistory", "public")).ReplaceService<IHistoryRepository, LoweredCaseMigrationHistoryRepository>()
+    .UseSnakeCaseNamingConvention()
+);
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
