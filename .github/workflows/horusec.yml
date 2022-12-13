@@ -13,12 +13,12 @@ name: "Horusec Scan"
 
 on:
    push:
-     branches: [ "main" ]
+     branches: [ "none" ]
    pull_request:
      # The branches below must be a subset of the branches above
-     branches: [ "main" ]
-   schedule:
-     - cron: '22 20 * * 6'
+     branches: [ "none" ]
+#   schedule:
+#     - cron: '22 20 * * 6'
 
 jobs:
   checking_code:
