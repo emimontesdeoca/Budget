@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using BlazorApp1.Shared
+@using BlazorApp1.Client.Objects
 @attribute [Authorize]
 @inject HttpClient Http
 
@@ -11,7 +12,7 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (_forecasts.Count == 0)
 {
     <p><em>Loading...</em></p>
 }
@@ -27,7 +28,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in _forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
@@ -41,13 +42,23 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private readonly List<WeatherForecast> _forecasts = new List<WeatherForecast>();
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            WeatherForecastDto[]? forecastsDtos = await Http.GetFromJsonAsync<WeatherForecastDto[]>("WeatherForecast");
+
+            foreach (WeatherForecastDto weatherForecastDto in forecastsDtos)
+            {
+                _forecasts.Add(new WeatherForecast()
+                {
+                    Date = weatherForecastDto.Date,
+                    Summary = weatherForecastDto.Summary,
+                    TemperatureC = weatherForecastDto.TemperatureC
+                });
+            }
         }
         catch (AccessTokenNotAvailableException exception)
         {

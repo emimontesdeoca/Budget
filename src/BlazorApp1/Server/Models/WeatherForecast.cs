@@ -1,13 +1,11 @@
-namespace BlazorApp1.Shared
+namespace BlazorApp1.Server.Models
 {
-    public class WeatherForecast
+    internal class WeatherForecast
     {
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }
 
         public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 }

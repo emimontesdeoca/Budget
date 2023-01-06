@@ -1,3 +1,4 @@
+using BlazorApp1.Server.Models;
 using BlazorApp1.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,15 +23,27 @@ namespace BlazorApp1.Server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeatherForecastDto> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            WeatherForecast[] weatherForecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast()
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            }).ToArray();
+
+             var dtos = new List<WeatherForecastDto>();
+             foreach (var forecast in weatherForecasts)
+             {
+                 dtos.Add(new WeatherForecastDto()
+                 {
+                     Date = forecast.Date,
+                     Summary = forecast.Summary,
+                     TemperatureC = forecast.TemperatureC
+                 });
+             }
+
+             return dtos;
         }
     }
 }
