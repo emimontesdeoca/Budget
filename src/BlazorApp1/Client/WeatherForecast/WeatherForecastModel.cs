@@ -1,6 +1,6 @@
-namespace BlazorApp1.Client.Objects;
+namespace BlazorApp1.Client.WeatherForecast;
 
-internal class WeatherForecast
+internal class WeatherForecastModel
 {
     public DateTime Date { get; set; }
 
