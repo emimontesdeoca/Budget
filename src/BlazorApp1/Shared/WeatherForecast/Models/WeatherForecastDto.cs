@@ -1,6 +1,6 @@
-namespace BlazorApp1.Server.Models
+namespace BlazorApp1.Shared.WeatherForecast.Models
 {
-    internal class WeatherForecast
+    public class WeatherForecastDto
     {
         public DateTime Date { get; set; }
 

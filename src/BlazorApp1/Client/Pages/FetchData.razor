@@ -1,4 +1,6 @@
 ﻿@page "/fetchdata"
+@using BlazorApp1.Shared.WeatherForecast.Models;
+@using BlazorApp1.Shared.WeatherForecast;
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using BlazorApp1.Shared
@@ -48,7 +50,9 @@ else
     {
         try
         {
-            WeatherForecastDto[]? forecastsDtos = await Http.GetFromJsonAsync<WeatherForecastDto[]>("WeatherForecast");
+            var logic = new WeatherForecastLogic();
+
+            WeatherForecastDto[] forecastsDtos = logic.GetWeatherForecast().ToArray();
 
             foreach (WeatherForecastDto weatherForecastDto in forecastsDtos)
             {
