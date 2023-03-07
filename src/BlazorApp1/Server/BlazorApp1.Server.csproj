@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Client\BlazorApp1.Client.csproj" />
+    <ProjectReference Include="..\Client\Client.WASM.csproj" />
   </ItemGroup>
 
   <ItemGroup>

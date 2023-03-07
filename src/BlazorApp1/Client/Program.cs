@@ -1,4 +1,4 @@
-using BlazorApp1.Client;
+using Client.WASM;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

@@ -1,4 +1,4 @@
-namespace BlazorApp1.Client.WeatherForecast;
+namespace Client.WASM.WeatherForecast;
 
 internal class WeatherForecastModel
 {
